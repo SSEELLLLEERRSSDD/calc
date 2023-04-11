@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication36
+{
+    public delegate double Calc(double num1, double num2);
+
+    interface ICalc
+    {
+        double plus(double a, double b);
+
+        double minus(double a, double b);
+
+        double umnosh(double a, double b);
+
+        double del(double a, double b);
+    }
+    class funks : ICalc
+    {
+        public double plus(double a, double b)
+        {
+            return a + b;
+        }
+
+        public double minus(double a, double b)
+        {
+            return a - b;
+        }
+
+        public double umnosh(double a, double b)
+        {
+            return a * b;
+        }
+
+        public double del(double a, double b)
+        {
+            return a / b;
+        }
+    }
+    
+    class Program
+    {
+        
+        static void Main(string[] args)
+        {
+            funks dab = new funks();
+            Console.WriteLine("Введите операцию, затем два числа");
+            
+            string oper = Console.ReadLine();
+            while(oper != "+" && oper != "-" && oper != "*" && oper != "/")
+            {
+                Console.WriteLine("Введите операцию, а не иные символы");
+                oper = Console.ReadLine();
+            }
+            
+            Console.WriteLine("Введите первое число:");
+            double chis1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите второе число:");
+            double chis2 = Convert.ToDouble(Console.ReadLine());
+            while (oper == "/" && chis2 == 0)
+            {
+                Console.WriteLine("Введите число отличное от нуля");
+                chis2 = Convert.ToDouble(Console.ReadLine());
+            }
+
+            switch (oper)
+            {
+                case "+":
+                    Console.WriteLine("Ответ:" + dab.plus(chis1, chis2));
+                    break;
+                case "-":
+                    Console.WriteLine("Ответ:" + dab.minus(chis1, chis2));
+                    break;
+
+                case "*":
+                    Console.WriteLine("Ответ:" + dab.umnosh(chis1, chis2));
+                    break;
+
+                case "/":
+                    Console.WriteLine("Ответ:" + dab.del(chis1, chis2));
+                    break;
+
+                case "0": 
+                    break;
+
+                default:
+                    Console.WriteLine("Ошибка");
+                    break;
+            }
+            Console.ReadLine();
+        }
+    }
+}
